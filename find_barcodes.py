@@ -125,8 +125,8 @@ def is_hamming_neighbor(string1, string2, error_hamming_distance):
 
 def get_true_barcodes(explicit_barcodes_counter, cell_count):
     """
-    Takes barcode counter and cell count, returns a list of true barcodes sorted by decreasing
-    frequency.
+    Takes barcode counter and cell count, returns a list of the most common barcodes sorted by
+    decreasing frequency.
     """
 
     true_barcodes = []
