@@ -56,7 +56,10 @@ def extract_barcodes(input_file, anchor):
 
 
 def group_by_hamming_distance(
-    explicit_barcodes_counter, cell_count, error_hamming_distance, proportion_to_consider
+    explicit_barcodes_counter,
+    cell_count,
+    error_hamming_distance,
+    proportion_to_consider,
 ):
     """
     Takes barcodes counter, cell count, allowable Hamming distance, proportion of barcodes to
@@ -97,7 +100,9 @@ def find_hamming_neighbor(explicit_barcode, grouped_barcodes, error_hamming_dist
     """
 
     for grouped_barcode in grouped_barcodes.keys():
-        if is_hamming_neighbor(explicit_barcode, grouped_barcode, error_hamming_distance):
+        if is_hamming_neighbor(
+            explicit_barcode, grouped_barcode, error_hamming_distance
+        ):
             return grouped_barcode
     return None
 
@@ -183,7 +188,7 @@ if __name__ == "__main__":
         default=1,
         help="""number of barcode groups to create during error correction proportional to
         cell-count, default is 1 (error-correction stops once cell_count number of groups are
-        created), this argument is ignored when error_hamming_distance is zero""",
+        created), this argument is ignored when error_hamming_distance is 0""",
     )
     parser.add_argument(
         "-o",
@@ -196,6 +201,8 @@ if __name__ == "__main__":
         parser.error("error distance must be greater than or equal to 0")
     if args.proportion_to_consider < 1:
         parser.error("proportion_to_consider must be greater than or equal to 1")
+    if args.cell_count < 1:
+        parser.error("cell_count must be greater than or equal to 1")
     find_barcodes(
         args.input,
         args.anchor,
